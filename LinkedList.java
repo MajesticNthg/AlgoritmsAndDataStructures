@@ -64,26 +64,7 @@ public class LinkedList {
     }
 
     public void removeAll(int _value) {
-        Node firstNode = this.head;
-        Node secondNode = this.head.next;
-
-        while (firstNode.value == _value) {
-            this.head = this.head.next;
-            firstNode = this.head;
-            secondNode = secondNode.next;
-        }
-
-        while (secondNode != null) {
-            if (secondNode.value == _value) {
-                firstNode.next = secondNode.next;
-            }
-            if (secondNode.next != null) {
-                secondNode.next = secondNode.next.next;
-            }
-            firstNode = firstNode.next;
-            secondNode = secondNode.next;
-
-        }
+        while (remove(_value));
     }
 
     public void clear() {
