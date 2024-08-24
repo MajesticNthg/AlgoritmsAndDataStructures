@@ -99,12 +99,12 @@ public class LinkedList {
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         if (this.head == null) {
-            // this.head = _nodeToInsert;
+            this.head = _nodeToInsert;
             return;
         }
 
         if (_nodeAfter == null) {
-            _nodeToInsert.next = this.head;
+            this.head = this.head.next;
             this.head = _nodeToInsert;
             return;
         }
