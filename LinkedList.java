@@ -48,6 +48,11 @@ public class LinkedList {
             return false;
         }
 
+        if (this.head.value == _value && this.head.next == null) {
+            clear();
+            return true;
+        }
+
         Node firstNode = this.head;
         Node secondNode = this.head.next;
 
@@ -94,6 +99,7 @@ public class LinkedList {
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         if (this.head == null) {
+            // this.head = _nodeToInsert;
             return;
         }
 
