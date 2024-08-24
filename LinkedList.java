@@ -98,8 +98,7 @@ public class LinkedList {
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
-        if (this.head == null) {
-            this.head = _nodeToInsert;
+        if (find(_nodeAfter.value) == null) {
             return;
         }
 
@@ -152,4 +151,6 @@ class Node {
         next = null;
     }
 }
+
+
 
