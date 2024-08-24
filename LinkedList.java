@@ -98,13 +98,13 @@ public class LinkedList {
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
-        if (find(_nodeAfter.value) == null) {
+        if (_nodeAfter == null) {
+            _nodeToInsert.next = this.head;
+            this.head = _nodeToInsert;
             return;
         }
 
-        if (_nodeAfter == null) {
-            this.head = this.head.next;
-            this.head = _nodeToInsert;
+        if (find(_nodeAfter.value) == null) {
             return;
         }
 
@@ -122,24 +122,6 @@ public class LinkedList {
         node.next = _nodeToInsert;
 
     }
-
-    public static LinkedList twoLists(LinkedList first, LinkedList second) {
-        LinkedList finalList = new LinkedList();
-        if (first.count() != second.count()) {
-            return finalList;
-        }
-
-        Node firstNode = first.head;
-        Node secondNode = second.head;
-
-        while (firstNode != null) {
-            finalList.addInTail(new Node(firstNode.value + secondNode.value));
-            firstNode = firstNode.next;
-            secondNode = secondNode.next;
-        }
-        return finalList;
-    }
-
 }
 
 class Node {
