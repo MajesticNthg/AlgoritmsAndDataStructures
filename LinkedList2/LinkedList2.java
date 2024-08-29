@@ -53,7 +53,7 @@ public class LinkedList2 {
         }
 
         if (this.head.value == _value && count() == 1) {
-            Clear();
+            clear();
             return true;
         }
 
@@ -86,6 +86,11 @@ public class LinkedList2 {
         }
     }
 
+    public void clear() {
+        this.head = null;
+        this.tail = null;
+    }
+
     public int count() {
         int size = 0;
         Node node = this.head;
@@ -95,11 +100,6 @@ public class LinkedList2 {
             node = node.next;
         }
         return size;
-    }
-
-    public void Clear() {
-        this.head = null;
-        this.tail = null;
     }
 
     public void insertAfter( Node _nodeAfter, Node _nodeToInsert) {
@@ -139,3 +139,4 @@ class Node {
         prev = null;
     }
 }
+
