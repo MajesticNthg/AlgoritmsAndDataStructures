@@ -10,20 +10,19 @@ public class LinkedList2 {
         tail = null;
     }
 
-    public void addInTail (Node _item) {
+    public void addInTail(Node _item) {
         if (head == null) {
             this.head = _item;
             this.head.next = null;
             this.head.prev = null;
-        }
-        else {
+        } else {
             this.tail.next = _item;
             _item.prev = tail;
         }
         this.tail = _item;
     }
 
-    public Node find (int _value) {
+    public Node find(int _value) {
         Node node = this.head;
         while (node != null) {
             if (node.value == _value) {
@@ -34,7 +33,7 @@ public class LinkedList2 {
         return null;
     }
 
-    public ArrayList<Node> findAll (int _value) {
+    public ArrayList<Node> findAll(int _value) {
         ArrayList<Node> nodes = new ArrayList<Node>();
         Node node = this.head;
 
@@ -47,7 +46,7 @@ public class LinkedList2 {
         return nodes;
     }
 
-    public boolean remove (int _value) {
+    public boolean remove(int _value) {
         if (this.head == null) {
             return false;
         }
@@ -58,6 +57,7 @@ public class LinkedList2 {
         }
 
         if (this.head.value == _value) {
+            this.head.next.prev = null;
             this.head = this.head.next;
             return true;
         }
@@ -80,7 +80,7 @@ public class LinkedList2 {
         return false;
     }
 
-    public void removeAll (int _value) {
+    public void removeAll(int _value) {
         while (remove(_value)) {
             remove(_value);
         }
@@ -102,7 +102,7 @@ public class LinkedList2 {
         return size;
     }
 
-    public void insertAfter( Node _nodeAfter, Node _nodeToInsert) {
+    public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         if (_nodeAfter == null) {
             _nodeToInsert.next = this.head;
             this.head = _nodeToInsert;
@@ -133,7 +133,8 @@ class Node {
     public int value;
     public Node next;
     public Node prev;
-    public Node (int _value) {
+
+    public Node(int _value) {
         value = _value;
         next = null;
         prev = null;
