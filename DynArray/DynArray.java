@@ -42,6 +42,10 @@ public class DynArray<T> {
     }
 
     public void insert (T itm, int index) {
+        if (index != count && (index < 0 || index > count)) {
+            throw new ArrayIndexOutOfBoundsException("Incorrect index");
+        }
+
         capacitySize();
 
         if (index == count) {
