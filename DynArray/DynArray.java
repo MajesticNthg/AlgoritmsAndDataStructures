@@ -53,6 +53,7 @@ public class DynArray<T> {
             array[i] = array[i - 1];
         }
         array[index] = itm;
+        count++;
     }
 
     public void remove (int index) throws Exception {
