@@ -38,8 +38,7 @@ public class DynArray<T> {
     public void append (T itm) {
         capacitySize();
 
-        int lastElement = count + 1;
-        array[lastElement] = itm;
+        array[count++] = itm;
     }
 
     public void insert (T itm, int index) {
@@ -51,7 +50,7 @@ public class DynArray<T> {
         }
 
         for (int i = count; i > index; i--) {
-            array[i] = array[i--];
+            array[i] = array[i - 1];
         }
         array[index] = itm;
     }
@@ -62,9 +61,10 @@ public class DynArray<T> {
         }
 
         for (int i = index; i < count; i++) {
-            array[i] = array[i++];
+            array[i] = array[i + 1];
         }
-        array[count] = null;
+        array[count - 1] = null;
+        count--;
 
         if (capacity > 16 && count < capacity / 2) {
             makeArray((int)(capacity / 1.5));
