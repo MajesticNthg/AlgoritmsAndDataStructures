@@ -4,38 +4,37 @@ public class moreBracketFunction {
             return false;
         }
 
-        Stack <String> firstBracket = new Stack<>();
-        Stack <String> secondBracket = new Stack<>();
-        Stack <String> thirdBracket = new Stack<>();
+        int first = 0;
+        int second = 0;
+        int third = 0;
 
         for (int i = 0; i < s.length(); i++) {
-            String flag = "";
             if (s.charAt(i) == '(') {
-                firstBracket.push("(");
+                first++;
             }
             else if (s.charAt(i) == ')') {
-                flag = firstBracket.pop();
+                first--;
             }
 
             else if (s.charAt(i) == '{') {
-                secondBracket.push("{");
+                second++;
             }
             else if (s.charAt(i) == '}') {
-                flag = secondBracket.pop();
+                second--;
             }
 
             else if (s.charAt(i) == '[') {
-                thirdBracket.push("[");
+                third++;
             }
             else if (s.charAt(i) == ']') {
-                flag = thirdBracket.pop();
+                third--;
             }
 
-            if (flag == null) {
+            if (first < 0 || second < 0 || third < 0) {
                 return false;
             }
         }
 
-        return (firstBracket.size() == 0 && secondBracket.size() == 0 && thirdBracket.size() == 0);
+        return (first == 0 && second == 0 && third == 0);
     }
 }
