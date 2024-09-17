@@ -1,14 +1,57 @@
 import java.util.*;
 
+class MinStack {
+    private LinkedList<Integer> list;
+    private int size;
+
+    public MinStack () {
+        this.list = new LinkedList<>();
+        this.size = 0;
+
+    }
+    public int size() {
+        return list.size();
+    }
+
+    public void push(int value) {
+        if (list.isEmpty() || value <= list.peekFirst()) {
+            list.addFirst(value);
+        }
+        this.size++;
+    }
+
+    public void pop(int value) {
+        if (!list.isEmpty() && value == list.peekFirst()) {
+            list.removeFirst();
+        }
+        this.size--;
+    }
+
+    public int peek () {
+        if (this.list.isEmpty()) {
+            throw new NullPointerException("Error - stack is empty");
+        }
+
+        return this.list.peekFirst();
+    }
+
+    public int getMin() {
+        return list.peekFirst();
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+}
+
 public class Stack<T> {
     private LinkedList<T> list;
-    private LinkedList<T> minStack;
+    private MinStack minStack = new MinStack();
     private int size;
     private double sum;
 
     public Stack() {
         this.list = new LinkedList<>();
-        this.minStack = new LinkedList<>();
         this.size = 0;
         this.sum = 0;
     }
@@ -31,8 +74,8 @@ public class Stack<T> {
         this.size++;
 
         this.sum += (Integer)val;
-        if (minStack.isEmpty() || (Integer)val < (Integer)minStack.peek()) {
-            minStack.push(val);
+        if (minStack.size() == 0 || (Integer)val < (Integer)minStack.peek()) {
+            minStack.push((Integer)val);
         }
     }
 
@@ -43,7 +86,7 @@ public class Stack<T> {
 
         return this.list.peekFirst();
     }
-    public T getMin () {
+    public int getMin () {
         return minStack.peek();
     }
 
