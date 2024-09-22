@@ -26,7 +26,7 @@ public class Deque<T> {
 
         this.size--;
 
-        this.list.removeFirst();
+        return this.list.removeFirst();
     }
 
     public T removeTail () {
