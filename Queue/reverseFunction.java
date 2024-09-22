@@ -2,18 +2,17 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class reverseFunction {
-    public void reverseQueue (Queue list1) {
-        Stack<Object> myCopy = new Stack<>();
-
-        LinkedList<Object> copy = new LinkedList<>();
-        int size = list1.size();
+    public void reverseQueue () {
+        Queue<T> reserve = new Queue<>();
+        int size = this.list.size();
 
         for (int i = 0; i < size; i++) {
-            myCopy.push(list1.dequeue());
+            reserve.enqueue(list.removeLast());
         }
 
         for (int i = 0; i < size; i++) {
-            list1.enqueue(myCopy.pop());
+            this.list.addLast(reserve.dequeue());
         }
+
     }
 }
