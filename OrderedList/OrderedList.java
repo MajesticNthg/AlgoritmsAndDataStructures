@@ -101,6 +101,7 @@ public class OrderedList<T> {
 
         if (this.head.value == val && count() == 1) {
             clear(true);
+            return;
         }
 
         if (this.head.value == val) {
