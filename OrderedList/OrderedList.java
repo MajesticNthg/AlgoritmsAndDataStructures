@@ -24,6 +24,10 @@ public class OrderedList<T> {
     }
 
     public int compare(T v1, T v2) {
+        if (v1 instanceof String) {
+            return compareString((String)v1, (String)v2);
+        }
+
         if ((Integer)v1 < (Integer)v2) {
             return -1;
         }
@@ -74,6 +78,21 @@ public class OrderedList<T> {
         firstNode.prev = this.tail;
         this.tail = firstNode;
 
+    }
+
+    private int compareString (String v1, String v2) {
+        String first = v1.replaceAll(" ", "");
+        String second = v2.replaceAll(" ", "");
+
+        if (first.compareTo(second) == 0) {
+            return 0;
+        }
+
+        if (first.compareTo(second) < 0) {
+            return -1;
+        }
+
+        return 1;
     }
 
     public Node<T> find (T val) {
