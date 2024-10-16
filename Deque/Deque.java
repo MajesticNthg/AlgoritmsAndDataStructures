@@ -3,12 +3,12 @@ import java.util.*;
 public class Deque<T> {
     private LinkedList<T> list;
     private int size;
-    private LinkedList<Integer> min;
+    private Stack<Integer> min;
 
     public Deque() {
         this.list = new LinkedList<>();
         this.size = 0;
-        this.min = new LinkedList<>();
+        this.min = new Stack<>();
     }
 
     public void addFront(T item) {
@@ -48,12 +48,19 @@ public class Deque<T> {
     }
 
     public void addMin (T item) {
-        if (this.min.isEmpty() || (Integer)item < this.min.getLast()) {
-            this.min.addLast((Integer)item);
+        if (this.min.isEmpty()) {
+            this.min.push((Integer)item);
+            return;
+        }
+
+        if ((Integer)item < this.min.peek()) {
+            this.min.pop();
+            this.min.push((Integer)item);
+            return;
         }
     }
 
     public int getMin (Deque deq) {
-        return this.min.getLast();
+        return this.min.peek();
     }
 }
