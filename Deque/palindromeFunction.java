@@ -11,9 +11,7 @@ public class palindromeFunction {
         }
 
         for (int x = 0; x < string.length() / 2; x++) {
-            Character s1 = palindrome.removeFront();
-            Character s2 = palindrome.removeTail();
-            if (!(s1.equals(s2))) {
+            if (!(palindrome.removeFront().equals(palindrome.removeTail()))) {
                 return false;
             }
         }
