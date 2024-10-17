@@ -3,12 +3,12 @@ import java.util.*;
 public class Deque<T> {
     private LinkedList<T> list;
     private int size;
-    private Stack<Integer> min;
+    private ArrayList<Integer> min;
 
     public Deque() {
         this.list = new LinkedList<>();
         this.size = 0;
-        this.min = new Stack<>();
+        this.min = new ArrayList<>();
     }
 
     public void addFront(T item) {
@@ -29,8 +29,7 @@ public class Deque<T> {
         }
 
         this.size--;
-
-        return this.list.removeFirst();
+        return deleteMin(this.list.removeFirst());
     }
 
     public T removeTail() {
@@ -40,27 +39,42 @@ public class Deque<T> {
 
         this.size--;
 
-        return this.list.removeLast();
+        return deleteMin(this.list.removeLast());
     }
 
     public int size() {
         return this.list.size();
     }
+    private T deleteMin (T item) {
+        this.min.remove(item);
+        return item;
+    }
 
-    public void addMin (T item) {
+    private void addMin (T item) {
         if (this.min.isEmpty()) {
-            this.min.push((Integer)item);
+            this.min.add((Integer)item);
             return;
         }
 
-        if ((Integer)item < this.min.peek()) {
-            this.min.pop();
-            this.min.push((Integer)item);
+        if ((Integer)item <= this.min.getLast()) {
+            this.min.add((Integer)item);
             return;
+        }
+
+        if ((Integer)item > this.min.getLast()) {
+            addCorrect(item);
+        }
+    }
+    private void addCorrect (T item) {
+        for (int x = 0; x < this.min.size(); x++) {
+            if (this.min.get(x) < (Integer)item) {
+                this.min.add(x, (Integer)item);
+                return;
+            }
         }
     }
 
     public int getMin (Deque deq) {
-        return this.min.peek();
+        return this.min.getLast();
     }
 }
