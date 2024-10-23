@@ -4,6 +4,7 @@ public class Deque<T> {
     private LinkedList<T> list;
     private int size;
     private ArrayList<Integer> min;
+    private LinkedList<Integer> sorted = new LinkedList<>();
 
     public Deque() {
         this.list = new LinkedList<>();
@@ -11,16 +12,19 @@ public class Deque<T> {
         this.min = new ArrayList<>();
     }
 
+
     public void addFront(T item) {
         this.list.addFirst(item);
         this.size++;
         addMin(item);
+        sortList(item);
     }
 
     public void addTail(T item) {
         this.list.addLast(item);
         this.size++;
         addMin(item);
+        sortList(item);
     }
 
     public T removeFront() {
@@ -29,6 +33,10 @@ public class Deque<T> {
         }
 
         this.size--;
+        if (sorted.getFirst().equals(this.list.getFirst())) {
+            sorted.removeFirst();
+        }
+
         return deleteMin(this.list.removeFirst());
     }
 
@@ -38,6 +46,9 @@ public class Deque<T> {
         }
 
         this.size--;
+        if (sorted.getFirst().equals(this.list.getLast())) {
+            sorted.removeFirst();
+        }
 
         return deleteMin(this.list.removeLast());
     }
@@ -72,6 +83,28 @@ public class Deque<T> {
                 return;
             }
         }
+    }
+
+    private void sortList (T item) {
+        if (sorted.isEmpty() || (Integer)item >= (Integer)sorted.getLast()) {
+            sorted.addLast((Integer)item);
+            return;
+        }
+        LinkedList<Integer> reserve = new LinkedList<>();
+
+        while (!sorted.isEmpty() && sorted.getFirst() < (Integer)item) {
+            reserve.addLast(sorted.removeFirst());
+        }
+        sorted.addFirst((Integer)item);
+
+        while (!reserve.isEmpty()) {
+            sorted.addFirst(reserve.removeLast());
+        }
+    }
+
+
+    public int newGetMin (Deque deq) {
+        return sorted.getFirst();
     }
 
     public int getMin (Deque deq) {
