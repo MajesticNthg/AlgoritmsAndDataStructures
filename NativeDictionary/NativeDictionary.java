@@ -1,18 +1,20 @@
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 
-class NativeDictionary<T> {
+class NativeDictionary<T>
+{
     public int size;
-    public String[] slots;
+    public String [] slots;
     public T[] values;
 
-    public NativeDictionary(int sz, Class clazz) {
+    public NativeDictionary(int sz, Class clazz)
+    {
         size = sz;
         slots = new String[size];
         values = (T[]) Array.newInstance(clazz, this.size);
     }
 
-    private int hashFun(String key) {
+    public int hashFun(String key) {
         byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
 
         int sum = 0;
