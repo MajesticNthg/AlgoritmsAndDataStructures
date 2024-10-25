@@ -6,10 +6,10 @@ class NativeDictionary<T> {
     public String[] slots;
     public T[] values;
 
-    public NativeDictionary(int size, Class clazz) {
-        this.size = size;
-        this.slots = new String[size];
-        this.values = (T[]) Array.newInstance(clazz, this.size);
+    public NativeDictionary(int sz, Class clazz) {
+        size = sz;
+        slots = new String[size];
+        values = (T[]) Array.newInstance(clazz, this.size);
     }
 
     private int hashFun(String key) {
