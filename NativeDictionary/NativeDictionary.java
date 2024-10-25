@@ -1,10 +1,9 @@
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 
-class NativeDictionary<T>
-{
+class NativeDictionary<T> {
     public int size;
-    public String [] slots;
+    public String[] slots;
     public T[] values;
 
     public NativeDictionary(int sz, Class clazz)
@@ -33,30 +32,19 @@ class NativeDictionary<T>
         int index = hashFun(value);
         int i = index;
 
-        int z = check(i, value);
-        if (z == -1 || z == i) {
-            return z;
-        }
-        else {
-            i = stepIndex(i);
-        }
-
-        for (int x = i; i != index; i = stepIndex(i)) {
-            if (check(i, value) == -1 || check(i, value) == i) {
-                return check(i, value);
+        do {
+            if (this.slots[i] == null) {
+                return -1;
             }
-        }
+
+            if (this.slots[i].equals(value)) {
+                return i;
+            }
+
+            i = stepIndex(i);
+        } while (i != index);
 
         return -1;
-    }
-    private int check (int i, String value) {
-        if (this.slots[i] == null) {
-            return -1;
-        }
-        if (this.slots[i].equals(value)) {
-            return i;
-        }
-        return -2;
     }
 
     public void put(String key, T value) {
@@ -82,28 +70,15 @@ class NativeDictionary<T>
         int index = hashFun(value);
         int i = index;
 
-        int z = secondCheck(i, value);
-        if (z == i) {
-            return i;
-        }
-        else {
-            i = stepIndex(i);
-        }
-
-
-        for (int x = i; i != index; i = stepIndex(i)) {
-            if (secondCheck(i, value) == i) {
-                return secondCheck(i, value);
+        do {
+            if (this.slots[i] == null) {
+                return i;
             }
-        }
+
+            i = stepIndex(i);
+        } while (i != index);
 
         return -1;
-    }
-    private int secondCheck (int i, String value) {
-        if (this.slots[i] == null) {
-            return i;
-        }
-        return -2;
     }
 
     private int stepIndex(int index) {
