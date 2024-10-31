@@ -156,16 +156,6 @@ public class PowerSet {
         PowerSet differenceSet = new PowerSet();
 
         for (int i = 0; i < this.size; i++) {
-            if (set2.slots[i] == null) {
-                continue;
-            }
-
-            if (!this.get(set2.slots[i])) {
-                differenceSet.put(set2.slots[i]);
-            }
-        }
-
-        for (int i = 0; i < this.size; i++) {
             if (this.slots[i] == null) {
                 continue;
             }
