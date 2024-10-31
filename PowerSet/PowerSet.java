@@ -137,13 +137,13 @@ public class PowerSet {
             return unionSet;
         }
 
-        for (int i = 0; unionSet.size() < this.size(); i++) {
+        for (int i = 0; i < this.size; i++) {
             if (this.slots[i] != null) {
                 unionSet.put(this.slots[i]);
             }
         }
 
-        for (int i = 0; unionSet.size() < this.size() + set2.size(); i++) {
+        for (int i = 0; i < set2.size; i++) {
             if (set2.slots[i] != null) {
                 unionSet.put(set2.slots[i]);
             }
