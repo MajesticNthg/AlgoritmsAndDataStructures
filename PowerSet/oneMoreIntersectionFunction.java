@@ -1,18 +1,14 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-public class oneMoreIntersectionFunction {
-    public Set moreIntersection(ArrayList<Set> listPowerSet) {
-        Set emptySet = new HashSet<>();
-        Set main = new HashSet<>(listPowerSet.getFirst());
+public PowerSet moreIntersection(List<PowerSet> listPowerSet) {
+    PowerSet emptySet = new PowerSet();
 
-        for (int i = 1; i < listPowerSet.size(); i++) {
-            main.retainAll(listPowerSet.get(i));
-            if (main.isEmpty()) {
-                return emptySet;
-            }
+    PowerSet main = listPowerSet.getFirst();
+    for (int i = 1; i < listPowerSet.size(); i++) {
+        main = main.intersection(listPowerSet.get(i));
+        if (main.size() == 0) {
+            return emptySet;
         }
-        return main;
     }
+    return main;
 }
